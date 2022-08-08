@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Loading from "./Loading";
+import "./App.css";
+import Loaded from "./Loaded";
 
 function App() {
+  const [username, setUsername] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [objectExample, setObjectExample] = useState({
+    name: "Name of object",
+  }); //dont need this
+  const ternary = isLoaded ? "YES" : "NO";
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>username is: {username ? username : "Guest"}</h1>
+      <h1>username is: {username || "Guest"}</h1>
+      <h1>{isLoaded ? "YES" : "NO"}</h1>
+      <h1>
+        {isLoaded && (
+          <>
+            This is really loaded 
+            <Loaded />
+          </>
+        )}
+      </h1>
+      <h2>{objectExample.name}</h2>
+      {isLoaded ? <Loaded /> : <Loading />}
+      <h2>isLoaded = {String(isLoaded)}</h2>
+      {/* <h1>{isLoaded ? "YES" : "NO"}</h1>
+      <h2>{objectExample.name}</h2> */}
+      <button
+        onClick={() => {
+          setIsLoaded(!isLoaded);
+        }}
+      >
+        Change Loaded
+      </button>
     </div>
   );
 }
